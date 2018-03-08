@@ -1,5 +1,5 @@
 (function() {
-	import helloWaldo from "./helloWaldo.js";
+	import helloWaldo from "helloWaldo.js";
 	
 	let testing = new helloWaldo;
 	testing.alertAppConsole();

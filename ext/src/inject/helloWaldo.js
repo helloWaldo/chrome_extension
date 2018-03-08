@@ -1,6 +1,6 @@
 export default class helloWaldo{	
 	constructor(){
-
+		console.log("hey");
 	}	
 
 	printAppConsole(){

@@ -11,17 +11,13 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": [
-      "src/bg/background.js"
-    ],
+    "page": "src/bg/background.html",
     "persistent": true
   },
-  "options_page": "src/options/index.html",
-  "page_action": {
-    "default_icon": "icons/icon19.png",
-    "default_title": "page action demo",
-    "default_popup": "src/page_action/page_action.html"
+  "browser_action": {
+    "default_icon": "icons/icon16.png"
   },
+  "options_page": "src/options/index.html",
   "permissions": [
     "chrome://favicon/",
     "clipboardRead",
@@ -32,7 +28,8 @@
     "notifications",
     "tabs",
     "https://*/*",
-    "http://*/*"
+    "http://*/*",
+    "activeTab"
   ],
   "content_scripts": [
     {
@@ -48,7 +45,7 @@
         "https://www.google.com/*"
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/inject/inject.js", "src/inject/helloWaldo.js"
       ]
     }
   ]
