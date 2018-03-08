@@ -8,3 +8,4 @@ Updates:
 <br />
 Dor (07.03.18): Where is waldo is printed in console now via controller + module class.
 <br />
+Dor
