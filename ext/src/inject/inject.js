@@ -1,4 +1,17 @@
-(function() {
+function appIconToggle(){
+	hw = new helloWaldo();
+	hw.doAlert();
+	hw.printConsole();
+	hw.printAppConsole();
+
+}
+
+hw = new helloWaldo();
+hw.doAlert();
+hw.printConsole();
+hw.printAppConsole();
+
+/*(function() {
 	import helloWaldo from "./helloWaldo.js";
 	
 	let testing = new helloWaldo;
@@ -14,8 +27,10 @@
 
 	alert('inserted self... giggity');
 
-})();
-/*
+})();*/
+
+
+
 chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
@@ -29,4 +44,19 @@ chrome.extension.sendMessage({}, function(response) {
 	}
 	}, 10);
 });
-*/
+
+//console.log("Hello. This message was sent from scripts/inject.js222");
+//alert('inserted self... giggity');
+/*chrome.extension.sendMessage({}, function(response) {
+	var readyStateCheckInterval = setInterval(function() {
+	if (document.readyState === "complete") {
+		clearInterval(readyStateCheckInterval);
+
+		// ----------------------------------------------------------
+		// This part of the script triggers when page is done loading
+		console.log("Hello. This message was sent from scripts/inject.js");
+		// ----------------------------------------------------------
+
+	}
+	}, 10);
+});*/

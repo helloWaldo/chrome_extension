@@ -42,10 +42,10 @@
     },
     {
       "matches": [
-        "https://www.google.com/*"
+        "http://*/*"
       ],
       "js": [
-        "src/inject/inject.js", "src/inject/helloWaldo.js"
+        "src/inject/inject.js"
       ]
     }
   ]
