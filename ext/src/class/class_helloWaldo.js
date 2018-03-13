@@ -1,18 +1,16 @@
 class helloWaldo{	
 	constructor(){
-		console.log("constructing");
-	}	
-
-	printAppConsole(){
-		chrome.extension.getBackgroundPage().console.log("printAppConsole");
+		
 	}
 
-	doAlert(){
-		alert('doAlert');
+	// SIMPLE ALERT!
+	doAlert(str){
+		alert(str);
 	}
 
-	printConsole(){
-		console.log("printConsole");
+	// prints to page console!
+	printConsole(str){
+		console.log(str);
 	}
 }
 
