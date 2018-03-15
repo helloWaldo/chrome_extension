@@ -3,6 +3,10 @@ class helloWaldo{
 		
 	}
 
+	addTransition(elem, time){
+		elem.style.transition = "transform "+time+" ease";
+	}
+
 	// SIMPLE ALERT!
 	doAlert(str){
 		alert(str);
@@ -13,4 +17,3 @@ class helloWaldo{
 		console.log(str);
 	}
 }
-
