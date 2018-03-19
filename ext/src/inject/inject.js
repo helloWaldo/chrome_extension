@@ -1,32 +1,44 @@
-(function() {
-	import helloWaldo from "./helloWaldo.js";
-	
-	let testing = new helloWaldo;
-	testing.alertAppConsole();
-	console.log('test');
-	// just place a div at top right
-	var div = document.createElement('div');
-	div.style.position = 'fixed';
-	div.style.top = 0;
-	div.style.right = 0;
-	div.textContent = 'Injected!';
-	document.body.appendChild(div);
+// ON DOM READY
+hw = new helloWaldo();
+elemMan = new elementsManipulator();
 
-	alert('inserted self... giggity');
+//let googleLogo = document.getElementById('hplogo');
 
-})();
-/*
-chrome.extension.sendMessage({}, function(response) {
-	var readyStateCheckInterval = setInterval(function() {
-	if (document.readyState === "complete") {
-		clearInterval(readyStateCheckInterval);
+//hw.addTransition(googleLogo, '1s');
 
-		// ----------------------------------------------------------
-		// This part of the script triggers when page is done loading
-		console.log("Hello. This message was sent from scripts/inject.js");
-		// ----------------------------------------------------------
+setTimeout(function() {
+//	elemMan.flip(googleLogo);
+}, 1000);
+let clickedElem;
+let mouseX;
+let mouseY;
 
-	}
-	}, 10);
+document.addEventListener("mousemove",function(event){
+	console.log(clickedElem.style.top);
+	mouseX =event.clientX;
+	mouseY =event.clientY;
+	clickedElem.style.top = mouseY - (clickedElem.offsetHeight/2) + "px";
+	clickedElem.style.left = mouseX - (clickedElem.offsetWidth/2) + "px";
+	console.log(clickedElem.style.top);
+
 });
+
+document.addEventListener("click",function(event){
+	console.log(event);
+	elemID = event.toElement;
+	clickedElem= event.toElement;
+	elemMan.selectElem(clickedElem);
+
+});
+
+
+
+/*
+function appIconToggle(){
+	hw = new helloWaldo();
+	hw.doAlert('do alert');
+	hw.printConsole('hello WAldO!!');
+}
 */
+
+//appIconToggle();

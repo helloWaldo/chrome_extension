@@ -1,4 +1,4 @@
-"use strict";
+/*"use strict";
 export default class domManipulator{
 	constructor(){
 		console.log("constructor is running");
@@ -7,4 +7,4 @@ export default class domManipulator{
 	console(str){
 		return console.log(str);
 	}
-}
+}*/

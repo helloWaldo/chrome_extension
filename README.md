@@ -1,13 +1,7 @@
+#todo - UPDATE THIS FILE!!!
+
 # chrome_extension
 This is the folder of the helloWaldo chrome extension 
 <br />
-Demo: [Link](https://rawgit.com/helloWaldo/chrome_extension/master/index.html)
-
+Demo: [Link](https://EXAMPLE.COM)
 <br /><br />
-Updates:
-<br />
-Dor (07.03.18): Where is waldo is printed in console now via controller + module class.
-<br />
-Dor test2
-david test2
-testtttttttt

@@ -34,7 +34,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.google.com/*"
+        "http://*/*"
       ],
       "css": [
         "src/inject/inject.css"
@@ -42,10 +42,10 @@
     },
     {
       "matches": [
-        "https://www.google.com/*"
+        "http://*/*"
       ],
       "js": [
-        "src/inject/inject.js", "src/inject/helloWaldo.js"
+        "src/inject/inject.js"
       ]
     }
   ]
