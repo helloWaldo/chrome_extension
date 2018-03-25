@@ -1,5 +1,4 @@
 class elementsManipulator{	
-
 	constructor(){
 		
 	}
@@ -16,18 +15,8 @@ class elementsManipulator{
 		elem.style.padding = "0";
 	}
 
-	prepareElem(elem){
+	selectElem(elem){
 		this.absolute(elem);
 		this.paddingless(elem);
-	}
-
-	selectElem(event){
-		clickedElem= event.toElement;
-		this.prepareElem(clickedElem);
-		return clickedElem;
-	}
-
-	deSelectElem(){
-		clickedElem=null;
 	}
 }

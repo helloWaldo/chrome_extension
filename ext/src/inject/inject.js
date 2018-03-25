@@ -14,21 +14,28 @@ let mouseX;
 let mouseY;
 
 document.addEventListener("mousemove",function(event){
-	console.log(clickedElem.style.top);
+	//console.log(clickedElem.style.top);
 	mouseX =event.clientX;
 	mouseY =event.clientY;
-	clickedElem.style.top = mouseY - (clickedElem.offsetHeight/2) + "px";
-	clickedElem.style.left = mouseX - (clickedElem.offsetWidth/2) + "px";
-	console.log(clickedElem.style.top);
+	if(clickedElem){
+		clickedElem.style.top = mouseY - (clickedElem.offsetHeight/2) + "px";
+		clickedElem.style.left = mouseX - (clickedElem.offsetWidth/2) + "px";
+	}
+	//console.log(clickedElem.style.top);
 
 });
 
-document.addEventListener("click",function(event){
-	console.log(event);
-	elemID = event.toElement;
-	clickedElem= event.toElement;
-	elemMan.selectElem(clickedElem);
+/*TODO - call togle func*/
+document.addEventListener("mousedown",function(event){
+	if(clickedElem==null){
+		clickedElem = elemMan.selectElem(event);
+	}
+});
 
+document.addEventListener("mouseup",function(event){
+	if(clickedElem!=null){
+		clickedElem = elemMan.deSelectElem(event);
+	}
 });
 
 
