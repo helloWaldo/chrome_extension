@@ -1,15 +1,30 @@
 class elementsManipulator{	
 
 	constructor(){
-		
+		this.clickedElem;
 	}
 
 	flip(elem){
-		elem.style.transform = "rotateY(180deg)";
+		if(elem.style.transform != "rotateY(180deg)" ){
+			elem.style.transform = "rotateY(0deg)";
+			this.addTransition (elem,"transform","1s");
+			elem.style.transform = "rotateY(180deg)";
+		}else{
+			elem.style.transform = "rotateY(180deg)";
+			this.addTransition (elem,"transform","1s");
+			elem.style.transform = "rotateY(0deg)";			
+		}
+		this.deSelectElem(this.clickedElem);
 	}
 
 	absolute(elem){
 		elem.style.position = "fixed";
+	}
+
+	addTransition(elem, style, duration){
+		elem.style.transition = style + " " + duration + " ease";
+		//elem.style.transition = "transform 1s ease";
+
 	}
 
 	paddingless(elem){
@@ -22,12 +37,11 @@ class elementsManipulator{
 	}
 
 	selectElem(event){
-		clickedElem= event.toElement;
-		this.prepareElem(clickedElem);
-		return clickedElem;
+		this.clickedElem= event.toElement;
+		this.prepareElem(this.clickedElem);
 	}
 
 	deSelectElem(){
-		clickedElem=null;
+		this.clickedElem=null;
 	}
 }
