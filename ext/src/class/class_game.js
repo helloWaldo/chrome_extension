@@ -39,6 +39,7 @@ class game{
 	start(){
 		this.enableDragMode();
 		this.enableFlipMode();
+		this.injectImg();
 	}
 
 	// Pause Game
@@ -72,6 +73,24 @@ class game{
 		this.mouseMode = "flip";
 		return true;
 	}
+	//injecting img to the first layer of the body TODO get image path function as paramater
+	injectImg(){
+		let imgSrc = "http://chairmanmigo.com/wp-content/uploads/2014/06/Wheres-Waldo-Face.jpg";
+		let injectObj = document.createElement("img");
+		injectObj.src = imgSrc;
+
+		this.chooseRandElem().appendChild(injectObj);
+
+
+	}
+	//get the body element TODO: choose random div from body
+	chooseRandElem(){
+		let baseBodyPath = document.childNodes[1].childNodes[1];
+		let randElem = baseBodyPath;
+		console.log(randElem);
+		return randElem;
+	}
+
 
 	// TODO: Add disableFlipMode Function
 
