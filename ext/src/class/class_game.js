@@ -80,7 +80,7 @@ class game{
 		injectObj.src = imgSrc;
 
 		this.chooseRandElem().appendChild(injectObj);
-
+ 
 
 	}
 	//get the body element TODO: choose random div from body
