@@ -37,10 +37,10 @@ class game{
 
 	// Start Game
 	start(){
-		this.disableLinks();
+		this.disableAllLinks();
 		this.enableDragMode();
 		this.enableFlipMode();
-		this.injectImg();
+	//	this.injectImg();
 	}
 
 	// Pause Game
@@ -76,7 +76,7 @@ class game{
 	}
 	//injecting img to the first layer of the body TODO get image path function as paramater
 	injectImg(){
-		let imgSrc = "http://chairmanmigo.com/wp-content/uploads/2014/06/Wheres-Waldo-Face.jpg";
+		let imgSrc = "https://chairmanmigo.com/wp-content/uploads/2014/06/Wheres-Waldo-Face.jpg";
 		let injectObj = document.createElement("img");
 		injectObj.src = imgSrc;
 
@@ -97,19 +97,31 @@ class game{
 	}
 
 
-	// TODO: Add disableFlipMode Function
-	//working on it, need to find a way to get all links from pahe out
-	disableLinks(){
-		var elements = document.getElementsByTagName('*');
+
+	//Preventing defult on click for elements Arr
+	disableLinks(elements){
 		for (var i = 0; i < elements.length; i++) {
-				 elements[i].disabled = true;
-				 console.log(elements[i].disabled);
-
+				elements[i].setAttribute("onClick","event.preventDefault();");
+				elements[i].href = "/#";
+				console.log(elements[i].href);
 		}
-
 	}
 
 
-// TODO: Add disableLinks Function and call it in start game
+	//making elements array and disabling thire click
+	disableAllLinks(){
+		let divElementss = document.getElementsByTagName('div');
+		let aElements = document.getElementsByTagName('a');
+		let imgElements = document.getElementsByTagName('img');
+		let LinksElements = document.getElementsByTagName('link');
+		let scriptsElements = document.getElementsByTagName('link');
+		this.disableLinks(divElementss);
+		this.disableLinks(aElements);
+		this.disableLinks(imgElements);
+		//this.disableLinks(scriptsElements);
 
+	}	
+
+// TODO: Add disableLinks Function and call it in start game
+	// TODO: Add disableFlipMode Function
 }
