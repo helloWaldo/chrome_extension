@@ -37,6 +37,7 @@ class game{
 
 	// Start Game
 	start(){
+		this.disableLinks();
 		this.enableDragMode();
 		this.enableFlipMode();
 		this.injectImg();
@@ -84,16 +85,31 @@ class game{
 
 	}
 	//get the body element TODO: choose random div from body
+	//managed to make it bit more random' still needs works on element selection
 	chooseRandElem(){
-		let baseBodyPath = document.childNodes[1].childNodes[1];
-		let randElem = baseBodyPath;
+		let baseBodyPath = document.children[0].children[1].children[0];
+		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.children.length) + 1);
+		let randElem = baseBodyPath.children[rndChildInx];
+		console.log(document.children[0].children.length);
+		console.log(rndChildInx);
 		console.log(randElem);
 		return randElem;
 	}
 
 
 	// TODO: Add disableFlipMode Function
+	//working on it, need to find a way to get all links from pahe out
+	disableLinks(){
+		var elements = document.getElementsByTagName('*');
+		for (var i = 0; i < elements.length; i++) {
+				 elements[i].disabled = true;
+				 console.log(elements[i].disabled);
 
-	// TODO: Add disableLinks Function and call it in start game
+		}
+
+	}
+
+
+// TODO: Add disableLinks Function and call it in start game
 
 }
