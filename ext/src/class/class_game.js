@@ -101,9 +101,10 @@ class game{
 	//Preventing defult on click for elements Arr
 	disableLinks(elements){
 		for (var i = 0; i < elements.length; i++) {
+				//this.RemoveClickEvent(elements[i]);
 				elements[i].setAttribute("onClick","event.preventDefault();");
 				elements[i].href = "/#";
-				console.log(elements[i].href);
+			//	console.log(elements[i]);
 		}
 	}
 
@@ -114,13 +115,19 @@ class game{
 		let aElements = document.getElementsByTagName('a');
 		let imgElements = document.getElementsByTagName('img');
 		let LinksElements = document.getElementsByTagName('link');
-		let scriptsElements = document.getElementsByTagName('link');
+		let spanElements = document.getElementsByTagName('span');
 		this.disableLinks(divElementss);
 		this.disableLinks(aElements);
 		this.disableLinks(imgElements);
-		//this.disableLinks(scriptsElements);
+		this.disableLinks(spanElements);
 
 	}	
+	//not sure we will use this to prevent elements to have event listenrs
+    RemoveClickEvent(element){
+    	let old_element = element;
+		let new_element = old_element.cloneNode(true);
+		old_element.parentNode.replaceChild(new_element, old_element);
+    }
 
 // TODO: Add disableLinks Function and call it in start game
 	// TODO: Add disableFlipMode Function
