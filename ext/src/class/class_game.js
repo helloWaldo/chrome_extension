@@ -78,6 +78,8 @@ class game{
 	injectImg(){
 		let imgSrc = "https://chairmanmigo.com/wp-content/uploads/2014/06/Wheres-Waldo-Face.jpg";
 		let injectObj = document.createElement("img");
+		injectObj.style.width= "15px";
+		injectObj.style.height= "15px";
 		let randElem = this.chooseRandElem(); 
 		injectObj.src = imgSrc;
 		injectObj.height = randElem.style.height;
@@ -91,20 +93,37 @@ class game{
 	//made it recursive to furture use' cant get this fucker to work
 	chooseRandElem(){
 		let baseBodyPath = document.children[0].children[1].children[0];
-		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.children.length) + 1);	
-		let randElem = baseBodyPath.children[rndChildInx-1];
-		console.log(randElem.style.top);
+		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.children.length) );	
+		let randElem = baseBodyPath.children[rndChildInx];
+		console.log(baseBodyPath);
 		console.log(randElem);
 		//console.log(randElem.style.top+" elem top "+ window.innerheight+" window top"+ randElem.style.left +" elem left "+ window.innerWidth + " window left ")
 
-		
+		console.log(this.isInViewPort(randElem));
 
-		if (randElem.nodeName =="DIV") {
+		if ((randElem.nodeName =="DIV" || randElem.nodeName =="IMG"|| randElem.nodeName =="P") && (this.isInViewPort(randElem))) {
 			return randElem;
 
 		}else{
 			return this.chooseRandElem();
 		}		
+	}
+
+	isInViewPort(element){
+		var bounding = element.getBoundingClientRect();
+		console.log(bounding.top + " top " +bounding.left + " left "+bounding.bottom + " bottom "+bounding.right + " right ");
+		console.log(bounding);
+	    if (
+	        bounding.top > 0 &&
+	        bounding.left > 0 && 
+	        bounding.bottom < (window.innerHeight || document.documentElement.clientHeight) &&
+	        bounding.right < (window.innerWidth || document.documentElement.clientWidth)
+	    ){
+
+	    	return true
+		}else{
+			return false
+		}
 	}
 
 
