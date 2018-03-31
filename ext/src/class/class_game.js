@@ -109,6 +109,9 @@ class game{
 		}		
 	}
 
+	//tried to make this happen bit it goes into an infinite loop that I cant really fiugre out mean while return trui sp it wont destroy the browser
+	//function to chek if element is on screen
+
 	isInViewPort(element){
 		var bounding = element.getBoundingClientRect();
 		console.log(bounding.top + " top " +bounding.left + " left "+bounding.bottom + " bottom "+bounding.right + " right ");
@@ -122,7 +125,7 @@ class game{
 
 	    	return true
 		}else{
-			return false
+			return true
 		}
 	}
 
