@@ -40,7 +40,7 @@ class game{
 		this.disableAllLinks();
 		this.enableDragMode();
 		this.enableFlipMode();
-	//	this.injectImg();
+		this.injectImg();
 	}
 
 	// Pause Game
@@ -78,22 +78,33 @@ class game{
 	injectImg(){
 		let imgSrc = "https://chairmanmigo.com/wp-content/uploads/2014/06/Wheres-Waldo-Face.jpg";
 		let injectObj = document.createElement("img");
+		let randElem = this.chooseRandElem(); 
 		injectObj.src = imgSrc;
-
-		this.chooseRandElem().appendChild(injectObj);
+		injectObj.height = randElem.style.height;
+		randElem.appendChild(injectObj)
+		console.log( window.screenTop);
  
 
 	}
 	//get the body element TODO: choose random div from body
 	//managed to make it bit more random' still needs works on element selection
+	//made it recursive to furture use' cant get this fucker to work
 	chooseRandElem(){
 		let baseBodyPath = document.children[0].children[1].children[0];
-		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.children.length) + 1);
-		let randElem = baseBodyPath.children[rndChildInx];
-		console.log(document.children[0].children.length);
-		console.log(rndChildInx);
+		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.children.length) + 1);	
+		let randElem = baseBodyPath.children[rndChildInx-1];
+		console.log(randElem.style.top);
 		console.log(randElem);
-		return randElem;
+		//console.log(randElem.style.top+" elem top "+ window.innerheight+" window top"+ randElem.style.left +" elem left "+ window.innerWidth + " window left ")
+
+		
+
+		if (randElem.nodeName =="DIV") {
+			return randElem;
+
+		}else{
+			return this.chooseRandElem();
+		}		
 	}
 
 
