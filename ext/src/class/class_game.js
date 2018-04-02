@@ -80,6 +80,7 @@ class game{
 		let injectObj = document.createElement("img");
 		injectObj.style.width= "15px";
 		injectObj.style.height= "15px";
+		injectObj.style.visibility='visible';
 		let randElem = this.chooseRandElem(); 
 		injectObj.src = imgSrc;
 		injectObj.height = randElem.style.height;
@@ -92,9 +93,9 @@ class game{
 	//managed to make it bit more random' still needs works on element selection
 	//made it recursive to furture use' cant get this fucker to work
 	chooseRandElem(){
-		let baseBodyPath = document.children[0].children[1];
-		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.children.length) );	
-		let randElem = baseBodyPath.children[rndChildInx];
+		let baseBodyPath =document.getElementsByTagName("body")[0].getElementsByTagName("div");
+		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.length) );	
+		let randElem = baseBodyPath[rndChildInx];
 		console.log(baseBodyPath);
 		console.log(randElem);
 		//console.log(randElem.style.top+" elem top "+ window.innerheight+" window top"+ randElem.style.left +" elem left "+ window.innerWidth + " window left ")
