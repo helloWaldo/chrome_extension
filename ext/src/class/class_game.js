@@ -92,7 +92,7 @@ class game{
 	//managed to make it bit more random' still needs works on element selection
 	//made it recursive to furture use' cant get this fucker to work
 	chooseRandElem(){
-		let baseBodyPath = document.children[0].children[1].children[0];
+		let baseBodyPath = document.children[0].children[1];
 		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.children.length) );	
 		let randElem = baseBodyPath.children[rndChildInx];
 		console.log(baseBodyPath);
@@ -114,18 +114,18 @@ class game{
 
 	isInViewPort(element){
 		var bounding = element.getBoundingClientRect();
-		console.log(bounding.top + " top " +bounding.left + " left "+bounding.bottom + " bottom "+bounding.right + " right ");
+		console.log(bounding.y + " top " +bounding.x + " left "+bounding.y + " bottom "+bounding.x + " right ");
 		console.log(bounding);
 	    if (
-	        bounding.top > 0 &&
-	        bounding.left > 0 && 
-	        bounding.bottom < (window.innerHeight || document.documentElement.clientHeight) &&
-	        bounding.right < (window.innerWidth || document.documentElement.clientWidth)
+	        bounding.x > 0 &&
+	        bounding.y > 0 && 
+	        bounding.y < (window.innerHeight || document.documentElement.clientHeight) &&
+	        bounding.x < (window.innerWidth || document.documentElement.clientWidth)
 	    ){
 
-	    	return true
+	    	return true;
 		}else{
-			return true
+			return false;
 		}
 	}
 
