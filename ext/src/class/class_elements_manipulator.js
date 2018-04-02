@@ -2,6 +2,7 @@ class elementsManipulator{
 
 	constructor(){
 		this.clickedElem;
+		this.zIndex=1000;
 	}
 
 	flip(elem){
@@ -34,6 +35,7 @@ class elementsManipulator{
 	prepareElem(elem){
 		this.absolute(elem);
 		this.paddingless(elem);
+		elem.style.zIndex= this.zIndex++;
 	}
 
 	selectElem(event){

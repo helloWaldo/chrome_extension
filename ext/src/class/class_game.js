@@ -78,8 +78,9 @@ class game{
 	injectImg(){
 		let imgSrc = "https://chairmanmigo.com/wp-content/uploads/2014/06/Wheres-Waldo-Face.jpg";
 		let injectObj = document.createElement("img");
-		injectObj.style.width= "15px";
-		injectObj.style.height= "15px";
+		injectObj.style.width= "150px";
+		injectObj.style.height= "150px";
+		
 		injectObj.style.visibility='visible';
 		let randElem = this.chooseRandElem(); 
 		injectObj.src = imgSrc;
@@ -90,47 +91,36 @@ class game{
 
 	}
 	//get the body element TODO: choose random div from body
-	//managed to make it bit more random' still needs works on element selection
-	//made it recursive to furture use' cant get this fucker to work
 	chooseRandElem(){
 		let baseBodyPath =document.getElementsByTagName("body")[0].getElementsByTagName("div");
 		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.length) );	
 		let randElem = baseBodyPath[rndChildInx];
 		console.log(baseBodyPath);
 		console.log(randElem);
-		//console.log(randElem.style.top+" elem top "+ window.innerheight+" window top"+ randElem.style.left +" elem left "+ window.innerWidth + " window left ")
-
-		console.log(this.isInViewPort(randElem));
-
-		if ((randElem.nodeName =="DIV" || randElem.nodeName =="IMG"|| randElem.nodeName =="P") && (this.isInViewPort(randElem))) {
+		/*console.log(this.isInViewPort(randElem));*/
+		if (randElem.nodeName =="DIV" || randElem.nodeName =="IMG"|| randElem.nodeName =="P") {
 			return randElem;
-
-		}else{
+		}/*TODO - decide what to do if elemt is not in viewport - 
+		else{
 			return this.chooseRandElem();
-		}		
+		}*/		
 	}
 
-	//tried to make this happen bit it goes into an infinite loop that I cant really fiugre out mean while return trui sp it wont destroy the browser
 	//function to chek if element is on screen
 
 	isInViewPort(element){
 		var bounding = element.getBoundingClientRect();
 		console.log(bounding.y + " top " +bounding.x + " left "+bounding.y + " bottom "+bounding.x + " right ");
 		console.log(bounding);
-	    if (
-	        bounding.x > 0 &&
+	    if (bounding.x > 0 &&
 	        bounding.y > 0 && 
 	        bounding.y < (window.innerHeight || document.documentElement.clientHeight) &&
-	        bounding.x < (window.innerWidth || document.documentElement.clientWidth)
-	    ){
+	        bounding.x < (window.innerWidth || document.documentElement.clientWidth)){
 
 	    	return true;
-		}else{
-			return false;
-		}
+	    }    
+	    return false;
 	}
-
-
 
 	//Preventing defult on click for elements Arr
 	disableLinks(elements){

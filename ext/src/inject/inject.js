@@ -1,7 +1,10 @@
 // ON DOM READY
+
+
 hw = new helloWaldo();
 elemMan = new elementsManipulator();
 waldoGame = new game();
+
 
 // Start Game
 waldoGame.start();
