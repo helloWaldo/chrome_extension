@@ -3,6 +3,7 @@ class game{
 		this.mouseMode = 'default';
 		this.mouseX;
 		this.mouseY;
+		this.timeInSec = 360;
 
 		// Function for event listner
 		this.mouseDownEvent = function(event){
@@ -37,6 +38,8 @@ class game{
 
 	// Start Game
 	start(){
+		this.initClock(360);
+		this.GameOnLable();
 		this.disableAllLinks();
 		this.enableDragMode();
 		this.enableFlipMode();
@@ -80,7 +83,6 @@ class game{
 		let injectObj = document.createElement("img");
 		injectObj.style.width= "150px";
 		injectObj.style.height= "150px";
-		
 		injectObj.style.visibility='visible';
 		let randElem = this.chooseRandElem(); 
 		injectObj.src = imgSrc;
@@ -90,6 +92,7 @@ class game{
  
 
 	}
+
 	//get the body element TODO: choose random div from body
 	chooseRandElem(){
 		let baseBodyPath =document.getElementsByTagName("body")[0].getElementsByTagName("div");
@@ -106,6 +109,7 @@ class game{
 		}*/		
 	}
 
+
 	//function to chek if element is on screen
 
 	isInViewPort(element){
@@ -121,7 +125,6 @@ class game{
 	    }    
 	    return false;
 	}
-
 	//Preventing defult on click for elements Arr
 	disableLinks(elements){
 		for (var i = 0; i < elements.length; i++) {
@@ -152,6 +155,51 @@ class game{
 		let new_element = old_element.cloneNode(true);
 		old_element.parentNode.replaceChild(new_element, old_element);
     }
+// the game on lable TODO: add where is waldo parameters for debug
+	GameOnLable(){
+		let body = document.getElementsByTagName('body');
+		let gameOnLable = document.createElement("div"); 
+		let lableContent = document.createTextNode("Game on!"); 
+		this.clockLabel()
+		gameOnLable.style.fontSize= "85px";https://www.camoni.co.il/#
+		gameOnLable.style.fontWeight="400";
+		gameOnLable.style.lineHeight = "2em";
+		gameOnLable.style.backgroundColor = "#24b9e7";
+		gameOnLable.style.textAlign= "center";
+		gameOnLable.style.direction= "ltr";
+		gameOnLable.appendChild(lableContent);
+		document.body.insertBefore(this.clock, document.body.firstChild);
+		document.body.insertBefore(gameOnLable, document.body.firstChild);
+	}
+
+	initClock(){
+		if (this.timeInSec >= 0) {	
+			setInterval (() => {	
+				this.timeInSec--;
+				this.clockLabel()
+			}, 1000);
+		}else{
+			this.end;
+		}
+	}
+
+	clockLabel(){
+		if(!this.clock) {
+			this.clock = document.createElement("div");
+			this.clock.style.fontSize= "45px";
+			this.clock.style.backgroundColor = "#24b9e7";
+			this.clock.style.textAlign= "center";
+			this.clock.style.direction= "ltr";
+			document.body.appendChild(this.clock)
+		}
+		this.clock.innerHTML = `${Math.floor(this.timeInSec/60)} Min ${Math.floor(this.timeInSec%60)}Sec`;
+		
+		return this.clock;
+	}
+	
+
+
+
 
 // TODO: Add disableLinks Function and call it in start game
 	// TODO: Add disableFlipMode Function
