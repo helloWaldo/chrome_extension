@@ -3,7 +3,7 @@ class game{
 		this.mouseMode = 'default';
 		this.mouseX;
 		this.mouseY;
-		this.timeInSec = 360;
+		this.timeInSec = 5;
 
 		// Function for event listner
 		this.mouseDownEvent = function(event){
@@ -38,7 +38,7 @@ class game{
 
 	// Start Game
 	start(){
-		this.initClock(360);
+		this.initClock();
 		this.GameOnLable();
 		this.disableAllLinks();
 		this.enableDragMode();
@@ -53,6 +53,7 @@ class game{
 
 	// End Game
 	end(){
+		alert("game over")
 		return false;
 	}
 
