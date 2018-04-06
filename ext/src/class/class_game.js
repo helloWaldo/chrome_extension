@@ -3,7 +3,12 @@ class game{
 		this.mouseMode = 'default';
 		this.mouseX;
 		this.mouseY;
-		this.timeInSec = 5;
+		this.timeInSec = 181;
+		this.timeInterval;
+		this.callIndex=0;
+		this.maxRecusion = 1000;
+		this.randElem;
+		this.baseBodyPath = document.getElementsByTagName("body")[0].getElementsByTagName("div");
 
 		// Function for event listner
 		this.mouseDownEvent = function(event){
@@ -22,6 +27,7 @@ class game{
 		// Function for event listner
 		this.mouseUpEvent = function(event){
 			elemMan.deSelectElem(elemMan.clickedElem);
+			elemMan.style.position = "absolute";
 		};
 
 		// Function for event listner
@@ -53,7 +59,8 @@ class game{
 
 	// End Game
 	end(){
-		alert("game over")
+		alert("game over");
+		clearInterval(this.timeInterval);
 		return false;
 	}
 
@@ -84,46 +91,69 @@ class game{
 		let injectObj = document.createElement("img");
 		injectObj.style.width= "150px";
 		injectObj.style.height= "150px";
+		injectObj.style.position= "absolute";
+		//injectObj.style.zIndex= -5;
 		injectObj.style.visibility='visible';
-		let randElem = this.chooseRandElem(); 
+
+		let hideElem = this.chooseRandElem(injectObj); 
 		injectObj.src = imgSrc;
-		injectObj.height = randElem.style.height;
-		randElem.appendChild(injectObj)
+		injectObj.style.top =  hideElem.offsetTop + "px";
+		injectObj.style.left =  hideElem.offsetLeft + "px";
+		injectObj.style.zIndex= hideElem.style.zIndex - 1;
+		hideElem.prepend(injectObj);
+		console.log( hideElem.clientTop);
 		console.log( window.screenTop);
  
 
 	}
 
 	//get the body element TODO: choose random div from body
-	chooseRandElem(){
-		let baseBodyPath =document.getElementsByTagName("body")[0].getElementsByTagName("div");
-		let rndChildInx = Math.floor((Math.random() *  baseBodyPath.length) );	
-		let randElem = baseBodyPath[rndChildInx];
-		console.log(baseBodyPath);
-		console.log(randElem);
+	chooseRandElem(injectObj){
+		this.callIndex++;
+		let rndChildInx = Math.floor((Math.random() *  this.baseBodyPath.length) );	
+		this.randElem = this.baseBodyPath[rndChildInx];
+		//console.log(baseBodyPath);
+		console.log(this.randElem);
 		/*console.log(this.isInViewPort(randElem));*/
-		if (randElem.nodeName =="DIV" || randElem.nodeName =="IMG"|| randElem.nodeName =="P") {
-			return randElem;
-		}/*TODO - decide what to do if elemt is not in viewport - 
-		else{
-			return this.chooseRandElem();
-		}*/		
+		//console.log(this.isHidable(injectObj,randElem));
+		if ((this.randElem.nodeName =="DIV" || this.randElem.nodeName =="IMG"|| this.randElem.nodeName =="P") && this.isHidable(injectObj)) {
+			return this.randElem;
+		}
+		else if(this.callIndex<this.maxRecusion){
+			return this.chooseRandElem(injectObj);
+		}
+		console.log("too many recursion: "+this.callIndex);
+		return false;	
+	}
+
+	isHidable(injectObj){
+		
+		if(this.randElem.clientLeft >= 0 && 
+		   this.randElem.clientTop >= 0 && 
+		   this.randElem.clientWidth > parseInt(injectObj.style.width) &&
+		   this.randElem.clientHeight > parseInt(injectObj.style.height))
+		  
+	    {
+			return true;
+		}
+		return false;
 	}
 
 
 	//function to chek if element is on screen
 
 	isInViewPort(element){
-		var bounding = element.getBoundingClientRect();
-		console.log(bounding.y + " top " +bounding.x + " left "+bounding.y + " bottom "+bounding.x + " right ");
-		console.log(bounding);
-	    if (bounding.x > 0 &&
-	        bounding.y > 0 && 
-	        bounding.y < (window.innerHeight || document.documentElement.clientHeight) &&
-	        bounding.x < (window.innerWidth || document.documentElement.clientWidth)){
-
+		console.log('eee');
+		//let bounding = element.getBoundingClientRect();
+		/*console.log(bounding.y + " top " +bounding.x + " left "+bounding.y + " bottom "+bounding.x + " right ");
+		console.log(bounding);*/
+	    if (element.style.top > 0 &&
+	        element.style.left > 0 ){
+	       /* bounding.y < (window.innerHeight || document.documentElement.clientHeight) &&
+	        bounding.x < (window.innerWidth || document.documentElement.clientWidth)){*/
 	    	return true;
 	    }    
+	    debugger;
 	    return false;
 	}
 	//Preventing defult on click for elements Arr
@@ -174,14 +204,14 @@ class game{
 	}
 
 	initClock(){
-		if (this.timeInSec >= 0) {	
-			setInterval (() => {	
+		this.timeInterval = setInterval (() => {	
+			this.clockLabel()
+			if (this.timeInSec >= 0) {
 				this.timeInSec--;
-				this.clockLabel()
-			}, 1000);
-		}else{
-			this.end;
-		}
+			}else{
+				this.end();
+			}
+		}, 1000);
 	}
 
 	clockLabel(){

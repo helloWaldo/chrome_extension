@@ -42,8 +42,9 @@ class elementsManipulator{
 		this.clickedElem= event.toElement;
 		this.prepareElem(this.clickedElem);
 	}
-
+	//TODO: find a way to keep element on current position after drag : 
 	deSelectElem(){
+		this.clickedElem.style.position = "absolute";
 		this.clickedElem=null;
 	}
 }
