@@ -15,7 +15,7 @@ class elementsManipulator{
 			this.addTransition (elem,"transform","1s");
 			elem.style.transform = "rotateY(0deg)";			
 		}
-		this.deSelectElem(this.clickedElem);
+		this.deSelectElem(elem);
 	}
 
 	fixed(elem){
@@ -42,7 +42,7 @@ class elementsManipulator{
 		this.prepareElem(this.clickedElem);
 	}
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
-	deSelectElem(){
+	deSelectElem(elem){
 		/*try to put elemnt in similar absolute position to current fixed position!*/
 		/*var box = this.clickedElem.getBoundingClientRect();
 		var offsetTop = Math.floor(box.top && box.top || box.y && box.y || 0);
@@ -51,8 +51,13 @@ class elementsManipulator{
 		this.clickedElem.style.top = offsetTop+"px"
 		this.clickedElem.style.left = offsetRight+"px"
 		this.clickedElem.style.position = "absolute";*/
-		
-		this.clickedElem.style.position = "fixed"
+		//let baseBodyPath = document.getElementsByTagName("body")[0].getElementsByTagName("div");
+		//elem.style.top = this.clickedElem.style.top  ;
+		//elem.style.left = this.clickedElem.style.left ;
+		//baseBodyPath[0].appendChild(elem)
+		elem.style.position = "fixed"
+
 		this.clickedElem=null;
+		
 	}
 }
