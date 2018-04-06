@@ -1,14 +1,15 @@
-class game{	
+class game{
+
 	constructor(){
+		this.baseBodyPath = document.getElementsByTagName("body")[0].getElementsByTagName("div");
+		this.timeInSec = 180;
+		this.callIndex=0;
+		this.maxRecusion = 1000;
 		this.mouseMode = 'default';
 		this.mouseX;
 		this.mouseY;
-		this.timeInSec = 181;
-		this.timeInterval;
-		this.callIndex=0;
-		this.maxRecusion = 1000;
 		this.randElem;
-		this.baseBodyPath = document.getElementsByTagName("body")[0].getElementsByTagName("div");
+		this.timeInterval;
 
 		// Function for event listner
 		this.mouseDownEvent = function(event){
@@ -20,21 +21,18 @@ class game{
 			if(elemMan.clickedElem === null){
 				elemMan.selectElem(event);
 			}
-
 			elemMan.flip(elemMan.clickedElem);
 		};
 
 		// Function for event listner
 		this.mouseUpEvent = function(event){
 			elemMan.deSelectElem(elemMan.clickedElem);
-			elemMan.style.position = "absolute";
 		};
 
 		// Function for event listner
 		this.mouseMove = function(event){
 			this.mouseX = event.clientX;
 			this.mouseY = event.clientY;
-
 			if(elemMan.clickedElem){
 				elemMan.clickedElem.style.top = this.mouseY - (elemMan.clickedElem.offsetHeight/2) + "px";
 				elemMan.clickedElem.style.left = this.mouseX - (elemMan.clickedElem.offsetWidth/2) + "px";
@@ -85,10 +83,17 @@ class game{
 		this.mouseMode = "flip";
 		return true;
 	}
+
+	disableFlipMode(){
+		document.removeEventListener('dblclick',this.event_doubleClick_flip);
+		this.mouseMode = "default";
+		return true;
+	}
 	//injecting img to the first layer of the body TODO get image path function as paramater
 	injectImg(){
 		let imgSrc = "https://chairmanmigo.com/wp-content/uploads/2014/06/Wheres-Waldo-Face.jpg";
 		let injectObj = document.createElement("img");
+		injectObj.id="waldoImg"
 		injectObj.style.width= "150px";
 		injectObj.style.height= "150px";
 		injectObj.style.position= "absolute";
@@ -103,23 +108,20 @@ class game{
 		hideElem.prepend(injectObj);
 		console.log( hideElem.clientTop);
 		console.log( window.screenTop);
- 
-
 	}
 
-	//get the body element TODO: choose random div from body
+	//choose random element from DOM
 	chooseRandElem(injectObj){
 		this.callIndex++;
-		let rndChildInx = Math.floor((Math.random() *  this.baseBodyPath.length) );	
+		let rndChildInx = Math.floor((Math.random() * this.baseBodyPath.length));	
 		this.randElem = this.baseBodyPath[rndChildInx];
-		//console.log(baseBodyPath);
 		console.log(this.randElem);
+		//console.log(baseBodyPath);
 		/*console.log(this.isInViewPort(randElem));*/
 		//console.log(this.isHidable(injectObj,randElem));
 		if ((this.randElem.nodeName =="DIV" || this.randElem.nodeName =="IMG"|| this.randElem.nodeName =="P") && this.isHidable(injectObj)) {
 			return this.randElem;
-		}
-		else if(this.callIndex<this.maxRecusion){
+		}else if(this.callIndex < this.maxRecusion){
 			return this.chooseRandElem(injectObj);
 		}
 		console.log("too many recursion: "+this.callIndex);
@@ -127,35 +129,16 @@ class game{
 	}
 
 	isHidable(injectObj){
-		
+	//let bounding = element.getBoundingClientRect();
 		if(this.randElem.clientLeft >= 0 && 
 		   this.randElem.clientTop >= 0 && 
 		   this.randElem.clientWidth > parseInt(injectObj.style.width) &&
-		   this.randElem.clientHeight > parseInt(injectObj.style.height))
-		  
-	    {
-			return true;
+		   this.randElem.clientHeight > parseInt(injectObj.style.height)) {
+			 return true;
 		}
 		return false;
 	}
 
-
-	//function to chek if element is on screen
-
-	isInViewPort(element){
-		console.log('eee');
-		//let bounding = element.getBoundingClientRect();
-		/*console.log(bounding.y + " top " +bounding.x + " left "+bounding.y + " bottom "+bounding.x + " right ");
-		console.log(bounding);*/
-	    if (element.style.top > 0 &&
-	        element.style.left > 0 ){
-	       /* bounding.y < (window.innerHeight || document.documentElement.clientHeight) &&
-	        bounding.x < (window.innerWidth || document.documentElement.clientWidth)){*/
-	    	return true;
-	    }    
-	    debugger;
-	    return false;
-	}
 	//Preventing defult on click for elements Arr
 	disableLinks(elements){
 		for (var i = 0; i < elements.length; i++) {
@@ -172,8 +155,8 @@ class game{
 		let divElementss = document.getElementsByTagName('div');
 		let aElements = document.getElementsByTagName('a');
 		let imgElements = document.getElementsByTagName('img');
-		let LinksElements = document.getElementsByTagName('link');
 		let spanElements = document.getElementsByTagName('span');
+
 		this.disableLinks(divElementss);
 		this.disableLinks(aElements);
 		this.disableLinks(imgElements);
@@ -186,7 +169,7 @@ class game{
 		let new_element = old_element.cloneNode(true);
 		old_element.parentNode.replaceChild(new_element, old_element);
     }
-// the game on lable TODO: add where is waldo parameters for debug
+	// the game on lable TODO: add where is waldo parameters for debug
 	GameOnLable(){
 		let body = document.getElementsByTagName('body');
 		let gameOnLable = document.createElement("div"); 
@@ -204,7 +187,12 @@ class game{
 	}
 
 	initClock(){
-		this.timeInterval = setInterval (() => {	
+		this.timeInterval = setInterval (() => {
+			/*let el = document.getElementById('waldoImg')
+			console.log(this.elementInViewport())
+			console.log(this.findHighestZIndex('img'))
+			console.log(el.style.zIndex)*/
+			
 			this.clockLabel()
 			if (this.timeInSec >= 0) {
 				this.timeInSec--;
@@ -224,14 +212,42 @@ class game{
 			document.body.appendChild(this.clock)
 		}
 		this.clock.innerHTML = `${Math.floor(this.timeInSec/60)} Min ${Math.floor(this.timeInSec%60)}Sec`;
-		
 		return this.clock;
 	}
-	
 
+	elementInViewport() {
+	  let el = document.getElementById('waldoImg')
 
+	  var top = el.offsetTop;
+	  var left = el.offsetLeft;
+	  var width = el.offsetWidth;
+	  var height = el.offsetHeight;
 
+	  while(el.offsetParent) {
+	    el = el.offsetParent;
+	    top += el.offsetTop;
+	    left += el.offsetLeft;
+	  }
 
-// TODO: Add disableLinks Function and call it in start game
-	// TODO: Add disableFlipMode Function
+	  return (
+	    top >= window.pageYOffset &&
+	    left >= window.pageXOffset &&
+	    (top + height) <= (window.pageYOffset + window.innerHeight) &&
+	    (left + width) <= (window.pageXOffset + window.innerWidth)
+	  );
+	}
+
+	findHighestZIndex(elem){
+	  var elems = document.getElementsByTagName(elem);
+	  var highest = 0;
+	  for (var i = 0; i < elems.length; i++)
+	  {
+	    var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
+	    if ((zindex > highest) && (zindex != 'auto'))
+	    {
+	      highest = zindex;
+	    }
+	  }
+	  return highest;
+	}
 }
