@@ -25,7 +25,13 @@ class game{
 		};
 
 		// Function for event listner
+		//needs work on where to put the element after drag
 		this.mouseUpEvent = function(event){
+			elemMan.clickedElem.clientX = this.mouseX + 'px'
+			elemMan.clickedElem.clientY = this.mouseY + 'px'
+	//		elemMan.clickedElem.parentNode.removeChild( elemMan.clickedElem );
+	//		document.elementFromPoint(this.mouseX,this.mouseY).appendChild( elemMan.clickedElem );
+
 			elemMan.deSelectElem(elemMan.clickedElem);
 		};
 

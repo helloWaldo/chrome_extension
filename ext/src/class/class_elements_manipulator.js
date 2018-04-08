@@ -55,9 +55,8 @@ class elementsManipulator{
 		//elem.style.top = this.clickedElem.style.top  ;
 		//elem.style.left = this.clickedElem.style.left ;
 		//baseBodyPath[0].appendChild(elem)
-		elem.style.position = "fixed"
-
+		elem.style.position = "absolute"
 		this.clickedElem=null;
-		
+
 	}
 }
