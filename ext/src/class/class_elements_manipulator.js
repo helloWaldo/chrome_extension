@@ -3,6 +3,9 @@ class elementsManipulator{
 	constructor(){
 		this.clickedElem;
 		this.zIndex=1000;
+		this.oldWidth;
+		this.oldheight;
+
 	}
 
 	flip(elem){
@@ -38,25 +41,30 @@ class elementsManipulator{
 	}
 
 	selectElem(event){
-		this.clickedElem= event.toElement;
+		this.clickedElem = event.toElement;
+		this.oldWidth = this.clickedElem.offsetWidth
 		this.prepareElem(this.clickedElem);
 	}
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
 	deSelectElem(elem){
 		/*try to put elemnt in similar absolute position to current fixed position!*/
-		/*var box = this.clickedElem.getBoundingClientRect();
-		var offsetTop = Math.floor(box.top && box.top || box.y && box.y || 0);
-		var offsetRight = Math.floor(box.left && box.left || box.x && box.x || 0);
-		console.log(offsetRight)
-		this.clickedElem.style.top = offsetTop+"px"
-		this.clickedElem.style.left = offsetRight+"px"
-		this.clickedElem.style.position = "absolute";*/
-		//let baseBodyPath = document.getElementsByTagName("body")[0].getElementsByTagName("div");
-		//elem.style.top = this.clickedElem.style.top  ;
-		//elem.style.left = this.clickedElem.style.left ;
+		let box = this.clickedElem.getBoundingClientRect();
+		let offsetTop = Math.floor(box.top && box.top || box.y && box.y || 0);
+		let offsetLeft = Math.floor(box.left && box.left || box.x && box.x || 0);
+		console.log(box)
+		let baseBodyPath = document.getElementsByTagName("body")[0].getElementsByTagName("div");
 		//baseBodyPath[0].appendChild(elem)
+
+		this.clickedElem.style.top = this.clickedElem.offsetTop + window.scrollY +"px"
+		this.clickedElem.style.left = this.clickedElem.offsetLeft + window.scrollX +"px"
+		this.clickedElem.clientY = this.clickedElem.offsetTop +  window.scrollY
+		this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX
+		this.clickedElem.style.width = this.oldWidth
+		this.clickedElem.style.height = this.oldheight
 		elem.style.position = "absolute"
+
 		this.clickedElem=null;
+
 
 	}
 }

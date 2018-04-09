@@ -29,8 +29,13 @@ class game{
 		this.mouseUpEvent = function(event){
 			elemMan.clickedElem.clientX = this.mouseX + 'px'
 			elemMan.clickedElem.clientY = this.mouseY + 'px'
-	//		elemMan.clickedElem.parentNode.removeChild( elemMan.clickedElem );
-	//		document.elementFromPoint(this.mouseX,this.mouseY).appendChild( elemMan.clickedElem );
+			let placeHoldDiv = document.createElement("div")
+			placeHoldDiv.clientX = this.mouseX + 'px'
+			placeHoldDiv.clientY = this.mouseY + 'px'
+			placeHoldDiv.style.zIndex = 5000
+			document.getElementsByTagName("body")[0].appendChild(placeHoldDiv);
+			elemMan.clickedElem.parentNode.removeChild( elemMan.clickedElem );
+			placeHoldDiv.appendChild( elemMan.clickedElem );
 
 			elemMan.deSelectElem(elemMan.clickedElem);
 		};
