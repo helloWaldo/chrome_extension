@@ -27,7 +27,7 @@ class game{
 		// Function for event listner
 		//needs work on where to put the element after drag
 		this.mouseUpEvent = function(event){
-			elemMan.clickedElem.clientX = this.mouseX + 'px'
+/*			elemMan.clickedElem.clientX = this.mouseX + 'px'
 			elemMan.clickedElem.clientY = this.mouseY + 'px'
 			let placeHoldDiv = document.createElement("div")
 			placeHoldDiv.clientX = this.mouseX + 'px'
@@ -35,7 +35,7 @@ class game{
 			placeHoldDiv.style.zIndex = 5000
 			document.getElementsByTagName("body")[0].appendChild(placeHoldDiv);
 			elemMan.clickedElem.parentNode.removeChild( elemMan.clickedElem );
-			placeHoldDiv.appendChild( elemMan.clickedElem );
+			placeHoldDiv.appendChild( elemMan.clickedElem );*/
 
 			elemMan.deSelectElem(elemMan.clickedElem);
 		};
@@ -115,8 +115,11 @@ class game{
 		injectObj.src = imgSrc;
 		injectObj.style.top =  hideElem.offsetTop + "px";
 		injectObj.style.left =  hideElem.offsetLeft + "px";
-		injectObj.style.zIndex= hideElem.style.zIndex - 1;
+		injectObj.style.zIndex= hideElem.style.zIndex + 1000;
 		hideElem.prepend(injectObj);
+		injectObj.addEventListener('mousedown',() => {
+			this.end()
+		});
 		console.log( hideElem.clientTop);
 		console.log( window.screenTop);
 	}
