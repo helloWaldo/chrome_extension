@@ -60,6 +60,8 @@ class elementsManipulator{
 		this.oldStyle.backgroundColor = tempElem.style.backgroundColor
 		this.oldStyle.backgroundImage = tempElem.style.backgroundImage
 
+		this.cloneStyle(this.oldStyle, this.clickedElem)
+
 		this.prepareElem(this.clickedElem);
 	}
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
@@ -73,7 +75,7 @@ class elementsManipulator{
 		baseBodyPath[0].appendChild(elem)
 
 		//this.clickedElem.style.cssText = this.oldStyle
-		this.cloneStyle(this.oldStyle, this.clickedElem)
+		
 
 		this.clickedElem.style.top = this.clickedElem.offsetTop + window.scrollY +"px"
 		this.clickedElem.style.left = this.clickedElem.offsetLeft + window.scrollX +"px"

@@ -158,6 +158,7 @@ class game{
 		for (var i = 0; i < elements.length; i++) {
 				//this.RemoveClickEvent(elements[i]);
 				elements[i].setAttribute("onClick","event.preventDefault();");
+				elements[i].setAttribute("onmousedown","event.preventDefault();");
 				elements[i].href = "/#";
 			//	console.log(elements[i]);
 		}
