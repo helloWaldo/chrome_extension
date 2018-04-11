@@ -1,3 +1,7 @@
+
+
+/* this is the test class that was used to try console.log
+
 class helloWaldo{	
 	constructor(){
 		
@@ -16,4 +20,4 @@ class helloWaldo{
 	printConsole(str){
 		console.log(str);
 	}
-}
+}*/
