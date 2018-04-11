@@ -42,6 +42,7 @@ class elementsManipulator{
 		this.fixed(this.clickedElem);
 		this.paddingless(this.clickedElem);
 		this.clickedElem.style.zIndex= this.zIndex++;
+		
 	}
 
 	selectElem(event){
@@ -63,6 +64,9 @@ class elementsManipulator{
 		this.oldStyle.backgroundImage = tempElem.style.backgroundImage*/
 		this.cloneStyle(this.oldStyle, this.clickedElem)
 		this.prepareElem(this.clickedElem);
+		
+	//debugger
+	
 	}
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
 	deSelectElem(){

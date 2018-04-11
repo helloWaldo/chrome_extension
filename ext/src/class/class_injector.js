@@ -22,7 +22,6 @@ class injector{
 		this.injectObj.style.left =  hideElem.offsetLeft + "px"
 		this.injectObj.style.zIndex= hideElem.style.zIndex + 1000
 		hideElem.prepend(this.injectObj)
-		debugger
 		this.injectObj.addEventListener('mouseup',() => {
 			waldoGame.end()
 		})

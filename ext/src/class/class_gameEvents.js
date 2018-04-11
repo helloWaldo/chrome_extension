@@ -12,10 +12,12 @@ class gameEvents{
 		};
 
 		this.mouseDownEvent = function(event){
+			document.body.style.cursor = "-webkit-grabbing"
 			elemMan.selectElem(event);
 		};
 
 		this.mouseUpEvent = function(event){
+			document.body.style.cursor = "-webkit-grab"
 			elemMan.deSelectElem();
 		};
 
@@ -35,7 +37,7 @@ class gameEvents{
 	enableDragMode(){
 		document.addEventListener('mousemove',this.mouseMove);
 		document.addEventListener('mousedown',this.mouseDownEvent);
-		document.addEventListener('mouseup',this.mouseUpEvent);
+		document.addEventListener('mouseup',this.mouseUpEvent);		
 		waldoGame.mouseMode = 'drag';	
 		return true;
 	}
