@@ -46,7 +46,9 @@ class elementsManipulator{
 	}
 
 	selectElem(event){
+
 		this.clickedElem = event.toElement;
+		this.clickedElem.draggable = false;
 		this.oldStyle = this.clickedElem.getBoundingClientRect()
 		this.computed = getComputedStyle(this.clickedElem).cssText
 		let tempElem = document.createElement("div");
@@ -64,7 +66,7 @@ class elementsManipulator{
 		this.oldStyle.backgroundImage = tempElem.style.backgroundImage*/
 		this.cloneStyle(this.oldStyle, this.clickedElem)
 		this.prepareElem(this.clickedElem);
-		
+
 	//debugger
 	
 	}
