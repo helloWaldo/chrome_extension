@@ -45,16 +45,20 @@ class elementsManipulator{
 		//this.oldWidth = this.clickedElem.offsetWidth
 		this.oldStyle = this.clickedElem.getBoundingClientRect()
 		this.computed = getComputedStyle(this.clickedElem).cssText
-		this.oldStyle.fontSize = this.clickedElem.style.fontSize
-		this.oldStyle.fontFamily = this.clickedElem.style.fontFamily
-		this.oldStyle.fontStyle = this.clickedElem.style.fontStyle
-		this.oldStyle.lineHeight = this.clickedElem.style.lineHeight
-		this.oldStyle.fontWeight = this.clickedElem.style.fontWeight
-		this.oldStyle.border = this.clickedElem.style.border
-		this.oldStyle.borderRadius = this.clickedElem.style.borderRadius
-		this.oldStyle.background = this.clickedElem.style.background
-		this.oldStyle.backgroundColor = this.clickedElem.style.backgroundColor
-		this.oldStyle.backgroundImage = this.clickedElem.style.backgroundImage
+
+		let tempElem = document.createElement("div");
+		tempElem.style.cssText = this.computed;
+
+		this.oldStyle.fontSize = tempElem.style.fontSize
+		this.oldStyle.fontFamily = tempElem.style.fontFamily
+		this.oldStyle.fontStyle = tempElem.style.fontStyle
+		this.oldStyle.lineHeight = tempElem.style.lineHeight
+		this.oldStyle.fontWeight = tempElem.style.fontWeight
+		this.oldStyle.border = tempElem.style.border
+		this.oldStyle.borderRadius = tempElem.style.borderRadius
+		this.oldStyle.background = tempElem.style.background
+		this.oldStyle.backgroundColor = tempElem.style.backgroundColor
+		this.oldStyle.backgroundImage = tempElem.style.backgroundImage
 
 		this.prepareElem(this.clickedElem);
 	}
@@ -69,20 +73,18 @@ class elementsManipulator{
 		baseBodyPath[0].appendChild(elem)
 
 		//this.clickedElem.style.cssText = this.oldStyle
-		//this.cloneStyle(this.oldStyle, this.clickedElem)
+		this.cloneStyle(this.oldStyle, this.clickedElem)
 
 		this.clickedElem.style.top = this.clickedElem.offsetTop + window.scrollY +"px"
 		this.clickedElem.style.left = this.clickedElem.offsetLeft + window.scrollX +"px"
 		this.clickedElem.clientY = this.clickedElem.offsetTop +  window.scrollY
 		this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX
-		this.clickedElem.style.cssText = this.computed
+		//this.clickedElem.style.cssText = this.computed
 
 		//this.clickedElem.style.height = this.oldheight
 		this.clickedElem.style.position = "absolute"
 
 		this.clickedElem=null;
-
-
 	}
 
 	cloneStyle(fromStyle, toElem){
@@ -102,7 +104,6 @@ class elementsManipulator{
 		toElem.style.borderRadius = fromStyle.borderRadius+'px'
 		toElem.style.backgroundColor = fromStyle.backgroundColor
 		toElem.style.backgroundImage = fromStyle.backgroundImage
-		debugger
 		return false
 	}
 }
