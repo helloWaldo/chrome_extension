@@ -50,6 +50,7 @@ class elementsManipulator{
 		this.computed = getComputedStyle(this.clickedElem).cssText
 		let tempElem = document.createElement("div");
 		tempElem.style.cssText = this.computed;
+/*		this.oldStyle.cssText = tempElem.style
 		this.oldStyle.fontSize = tempElem.style.fontSize
 		this.oldStyle.fontFamily = tempElem.style.fontFamily
 		this.oldStyle.fontStyle = tempElem.style.fontStyle
@@ -59,7 +60,7 @@ class elementsManipulator{
 		this.oldStyle.borderRadius = tempElem.style.borderRadius
 		this.oldStyle.background = tempElem.style.background
 		this.oldStyle.backgroundColor = tempElem.style.backgroundColor
-		this.oldStyle.backgroundImage = tempElem.style.backgroundImage
+		this.oldStyle.backgroundImage = tempElem.style.backgroundImage*/
 		this.cloneStyle(this.oldStyle, this.clickedElem)
 		this.prepareElem(this.clickedElem);
 	}
