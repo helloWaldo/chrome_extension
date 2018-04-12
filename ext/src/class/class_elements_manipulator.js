@@ -46,30 +46,46 @@ class elementsManipulator{
 	}
 
 	selectElem(event){
+		if (this.isValidSelection(event.target)) {
 
-		this.clickedElem = event.toElement;
-		this.clickedElem.draggable = false;
-		this.oldStyle = this.clickedElem.getBoundingClientRect()
-		this.computed = getComputedStyle(this.clickedElem).cssText
-		let tempElem = document.createElement("div");
-		tempElem.style.cssText = this.computed;
-/*		this.oldStyle.cssText = tempElem.style
-		this.oldStyle.fontSize = tempElem.style.fontSize
-		this.oldStyle.fontFamily = tempElem.style.fontFamily
-		this.oldStyle.fontStyle = tempElem.style.fontStyle
-		this.oldStyle.lineHeight = tempElem.style.lineHeight
-		this.oldStyle.fontWeight = tempElem.style.fontWeight
-		this.oldStyle.border = tempElem.style.border
-		this.oldStyle.borderRadius = tempElem.style.borderRadius
-		this.oldStyle.background = tempElem.style.background
-		this.oldStyle.backgroundColor = tempElem.style.backgroundColor
-		this.oldStyle.backgroundImage = tempElem.style.backgroundImage*/
-		this.cloneStyle(this.oldStyle, this.clickedElem)
-		this.prepareElem(this.clickedElem);
-
+			this.clickedElem = event.toElement;
+			//this.clickedElem = event.target;
+			this.clickedElem.draggable = false;
+			this.oldStyle = this.clickedElem.getBoundingClientRect()
+			this.computed = getComputedStyle(this.clickedElem).cssText
+			let tempElem = document.createElement("div");
+			tempElem.style.cssText = this.computed;
+	/*		this.oldStyle.cssText = tempElem.style
+			this.oldStyle.fontSize = tempElem.style.fontSize
+			this.oldStyle.fontFamily = tempElem.style.fontFamily
+			this.oldStyle.fontStyle = tempElem.style.fontStyle
+			this.oldStyle.lineHeight = tempElem.style.lineHeight
+			this.oldStyle.fontWeight = tempElem.style.fontWeight
+			this.oldStyle.border = tempElem.style.border
+			this.oldStyle.borderRadius = tempElem.style.borderRadius
+			this.oldStyle.background = tempElem.style.background
+			this.oldStyle.backgroundColor = tempElem.style.backgroundColor
+			this.oldStyle.backgroundImage = tempElem.style.backgroundImage*/
+			this.cloneStyle(this.oldStyle, this.clickedElem)
+			this.prepareElem(this.clickedElem);
+			}
+			else{
+				this.selectElem(event.toElement.parentNode)
+			}
 	//debugger
 	
 	}
+
+	isValidSelection(element){
+
+		if (element.nodeType  == 1 || (element.tagName =="DIV" || element.tagName =="img") ){
+
+			return true
+		}
+		return false
+	}
+
+
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
 	deSelectElem(){
 		this.baseBodyPath[0].appendChild(this.clickedElem)

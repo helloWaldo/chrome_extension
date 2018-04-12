@@ -8,7 +8,7 @@ class gameEvents{
 			if(elemMan.clickedElem === null){
 				elemMan.selectElem(event);
 			}
-			elemMan.flip(elemMan.clickedElem);
+			elemMan.flip(elemMan.clickedElem)
 		};
 
 		this.mouseDownEvent = function(event){
