@@ -13,16 +13,16 @@ class elementsManipulator{
 	}
 
 	flip(elem){
-		if(this.clickedElem.style.transform != "rotateY(180deg)" ){
-			this.clickedElem.style.transform = "rotateY(0deg)";
+		if(elem.style.transform != "rotateY(180deg)" ){
+			elem.style.transform = "rotateY(0deg)";
 			this.addTransition (elem,"transform","1s");
-			this.clickedElem.style.transform = "rotateY(180deg)";
+			elem.style.transform = "rotateY(180deg)";
 		}else{
-			this.clickedElem.style.transform = "rotateY(180deg)";
-			this.addTransition (this.clickedElem,"transform","1s");
-			this.clickedElem.style.transform = "rotateY(0deg)";			
+			elem.style.transform = "rotateY(180deg)";
+			this.addTransition (elem,"transform","1s");
+			elem.style.transform = "rotateY(0deg)";			
 		}
-		this.deSelectElem(this.clickedElem);
+		this.deSelectElem(elem);
 	}
 
 	fixed(){
@@ -30,7 +30,7 @@ class elementsManipulator{
 	}
 
 	addTransition(elem, style, duration){
-		this.clickedElem.style.transition = style + " " + duration + " ease";
+		elem.style.transition = style + " " + duration + " ease";
 		//elem.style.transition = "transform 1s ease";
 	}
 
@@ -45,10 +45,17 @@ class elementsManipulator{
 		
 	}
 
-	selectElem(event){
-		if (this.isValidSelection(event.target)) {
+	selectElem(event,element){
 
-			this.clickedElem = event.toElement;
+			if(typeof(element) =="undefined"){
+				this.clickedElem= event.toElement
+			}else{
+				this.clickedElem= element
+			}
+
+				console.log(element)		
+		if (this.isValidSelection(this.clickedElem)) {
+
 			//this.clickedElem = event.target;
 			this.clickedElem.draggable = false;
 			this.oldStyle = this.clickedElem.getBoundingClientRect()
@@ -70,18 +77,20 @@ class elementsManipulator{
 			this.prepareElem(this.clickedElem);
 			}
 			else{
-				this.selectElem(event.toElement.parentNode)
+				this.selectElem(event,this.clickedElem.parentElement)
+				console.log(this.clickedElem)
+
 			}
-	//debugger
 	
 	}
 
 	isValidSelection(element){
 
-		if (element.nodeType  == 1 || (element.tagName =="DIV" || element.tagName =="img") ){
-
+		if (element.nodeType  == 1 && (element.tagName =="DIV" || element.tagName =="IMG") ){
+			console.log("True")
 			return true
 		}
+		console.log("False")
 		return false
 	}
 

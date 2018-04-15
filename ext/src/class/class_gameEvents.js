@@ -5,20 +5,24 @@ class gameEvents{
 		this.mouseY;
 
 		this.event_doubleClick_flip= function(event) {
-			if(elemMan.clickedElem === null){
-				elemMan.selectElem(event);
+			if (event.button == 1 ){
+				elemMan.flip(event.toElement)
+				console.log("koko")
 			}
-			elemMan.flip(elemMan.clickedElem)
 		};
 
 		this.mouseDownEvent = function(event){
-			document.body.style.cursor = "-webkit-grabbing"
-			elemMan.selectElem(event);
+			if (event.button != 1 ){
+				document.body.style.cursor = "-webkit-grabbing"
+				elemMan.selectElem(event);
+			}
 		};
 
 		this.mouseUpEvent = function(event){
-			document.body.style.cursor = "-webkit-grab"
-			elemMan.deSelectElem();
+			if (event.button != 1 ){
+				document.body.style.cursor = "-webkit-grab"
+				elemMan.deSelectElem();
+			}
 		};
 
 		// Function for event listner
@@ -51,7 +55,7 @@ class gameEvents{
 	}
 
 	enableFlipMode(){
-		document.addEventListener('dblclick',this.event_doubleClick_flip);
+		document.addEventListener('mousedown',this.event_doubleClick_flip);
 		waldoGame.mouseMode = "flip";
 		return true;
 	}
