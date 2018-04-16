@@ -61,7 +61,11 @@ class elementsManipulator{
 			this.oldStyle = this.clickedElem.getBoundingClientRect()
 			this.computed = getComputedStyle(this.clickedElem).cssText
 			let tempElem = document.createElement("div");
+			tempElem.style = null
 			tempElem.style.cssText = this.computed;
+			//tempElem.setAttribute("style",this.computed)
+			console.log(this.computed)
+	
 	/*		this.oldStyle.cssText = tempElem.style
 			this.oldStyle.fontSize = tempElem.style.fontSize
 			this.oldStyle.fontFamily = tempElem.style.fontFamily
@@ -75,6 +79,7 @@ class elementsManipulator{
 			this.oldStyle.backgroundImage = tempElem.style.backgroundImage*/
 			this.cloneStyle(this.oldStyle, this.clickedElem)
 			this.prepareElem(this.clickedElem);
+
 			}
 			else{
 				this.selectElem(event,this.clickedElem.parentElement)
@@ -97,12 +102,16 @@ class elementsManipulator{
 
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
 	deSelectElem(){
-		this.baseBodyPath[0].appendChild(this.clickedElem)
-		this.clickedElem.style.top = this.clickedElem.offsetTop + window.scrollY +"px"
-		this.clickedElem.style.left = this.clickedElem.offsetLeft + window.scrollX +"px"
-		this.clickedElem.clientY = this.clickedElem.offsetTop +  window.scrollY
-		this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX
+		let clickedOffsetLeft = this.clickedElem.style.left + window.scrollX
+		let clickedOffsetTop = this.clickedElem.style.top + window.scrollY
+		//this.baseBodyPath[0].appendChild(this.clickedElem)
+		this.clickedElem.style.top = clickedOffsetTop +"px"
+		this.clickedElem.style.left = clickedOffsetLeft +"px"
+		//this.clickedElem.clientY = this.clickedElem.offsetTop +  window.scrollY
+		//this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX
 		this.clickedElem.style.position = "absolute"
+		console.log("tester")
+		
 		this.clickedElem=null;
 	}
 
@@ -123,6 +132,7 @@ class elementsManipulator{
 		toElem.style.borderRadius = fromStyle.borderRadius+'px'
 		toElem.style.backgroundColor = fromStyle.backgroundColor
 		toElem.style.backgroundImage = fromStyle.backgroundImage
+
 		return false
 	}
 
