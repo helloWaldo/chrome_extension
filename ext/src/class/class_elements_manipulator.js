@@ -23,7 +23,7 @@ class elementsManipulator{
 			elem.style.transform = "rotateY(0deg)";			
 		}
 		//this.deSelectElem(elem);
-		
+
 	}
 
 	fixed(){
@@ -49,37 +49,45 @@ class elementsManipulator{
 	selectElem(event){
 		if (this.isValidSelection(event.toElement) ) {
 
-			this.clickedElem = event.toElement;
+			this.clickedElem = event.target;
+			this.prepreChildrens(this.clickedElem);
 			//this.clickedElem = event.target;
 			this.clickedElem.draggable = false;
 			this.oldStyle = this.clickedElem.getBoundingClientRect()
 			this.computed = getComputedStyle(this.clickedElem).cssText
-			let tempElem = document.createElement("div");
-			tempElem.style.cssText = this.computed;
-	/*		this.oldStyle.cssText = tempElem.style
-			this.oldStyle.fontSize = tempElem.style.fontSize
-			this.oldStyle.fontFamily = tempElem.style.fontFamily
-			this.oldStyle.fontStyle = tempElem.style.fontStyle
-			this.oldStyle.lineHeight = tempElem.style.lineHeight
-			this.oldStyle.fontWeight = tempElem.style.fontWeight
-			this.oldStyle.border = tempElem.style.border
-			this.oldStyle.borderRadius = tempElem.style.borderRadius
-			this.oldStyle.background = tempElem.style.background
-			this.oldStyle.backgroundColor = tempElem.style.backgroundColor
-			this.oldStyle.backgroundImage = tempElem.style.backgroundImage*/
+			this.tempElem = document.createElement("div");
+			this.tempElem.style.cssText = this.computed
+			this.oldStyle.cssText = this.tempElem.style
+			this.oldStyle.fontSize = this.tempElem.style.fontSize
+			this.oldStyle.fontFamily = this.tempElem.style.fontFamily
+			this.oldStyle.fontStyle = this.tempElem.style.fontStyle
+			this.oldStyle.lineHeight = this.tempElem.style.lineHeight
+			this.oldStyle.fontWeight = this.tempElem.style.fontWeight
+			this.oldStyle.border = this.tempElem.style.border
+			this.oldStyle.borderRadius = this.tempElem.style.borderRadius
+			this.oldStyle.background = this.tempElem.style.background
+			this.oldStyle.backgroundColor = this.tempElem.style.backgroundColor
+			this.oldStyle.backgroundImage = this.tempElem.style.backgroundImage
 			this.cloneStyle(this.oldStyle, this.clickedElem)
+			this.clickedElem.cssText =  getComputedStyle(this.clickedElem).cssText
 			this.prepareElem(this.clickedElem);
 			}
 			else{
-				this.selectElem(event.toElement.parentNode)
+				this.selectElem(event.toElement.classList)
 			}
 	//debugger
 	
 	}
 
+	prepreChildrens(elem){
+		if(true){
+			console.log(elem.children)
+		}
+	}
+
 	isValidSelection(element){
 
-		if (element.nodeType  == 1 || (element.tagName =="DIV" || element.tagName =="img") ){
+		if (element.nodeType  == 1 || (element.tagName =="DIV" || element.tagName =="IMG") ){
 
 			return true
 		}
@@ -89,12 +97,14 @@ class elementsManipulator{
 
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
 	deSelectElem(){
-		this.baseBodyPath[0].appendChild(this.clickedElem)
+		this.clickedElem.style.cssText = window.getComputedStyle(this.clickedElem).cssText
+		document.getElementsByTagName("body")[0].appendChild(this.clickedElem)
+		this.clickedElem.style.position = "absolute"
+		//this.clickedElem= this.tempElem
 		this.clickedElem.style.top = this.clickedElem.offsetTop + window.scrollY +"px"
 		this.clickedElem.style.left = this.clickedElem.offsetLeft + window.scrollX +"px"
 		this.clickedElem.clientY = this.clickedElem.offsetTop +  window.scrollY
-		this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX
-		this.clickedElem.style.position = "absolute"
+		this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX		
 		this.clickedElem=null;
 	}
 

@@ -6,9 +6,8 @@ class gameEvents{
 
 		this.event_middleClick_flip = function(event) {
 			if (event.button == 1){
-/*				if(elemMan.clickedElem === null){
-					elemMan.selectElem(event);
-				}*/
+    			 event.preventDefault();
+     			window.location = '';
 				elemMan.flip(event.toElement)
 			}
 
@@ -16,8 +15,6 @@ class gameEvents{
 
 		this.mouseDownEvent = function(event){
 			document.body.style.cursor = "-webkit-grabbing"
-	
-			
 			if (event.button == 0){
 				elemMan.selectElem(event)
 			}
@@ -38,6 +35,7 @@ class gameEvents{
 			if(elemMan.clickedElem){
 				elemMan.clickedElem.style.top = this.mouseY - (elemMan.clickedElem.offsetHeight/2) + "px";
 				elemMan.clickedElem.style.left = this.mouseX - (elemMan.clickedElem.offsetWidth/2) + "px";
+			
 			}
 		}
 
