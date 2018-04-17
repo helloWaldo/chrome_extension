@@ -4,16 +4,26 @@ class gameEvents{
 		this.mouseX;
 		this.mouseY;
 
-		this.event_doubleClick_flip= function(event) {
-			if(elemMan.clickedElem === null){
-				elemMan.selectElem(event);
+		this.event_middleClick_flip = function(event) {
+			if (event.button == 1){
+/*				if(elemMan.clickedElem === null){
+					elemMan.selectElem(event);
+				}*/
+				elemMan.flip(event.toElement)
 			}
-			elemMan.flip(elemMan.clickedElem)
+
 		};
 
 		this.mouseDownEvent = function(event){
 			document.body.style.cursor = "-webkit-grabbing"
-			elemMan.selectElem(event);
+	
+			
+			if (event.button == 0){
+				elemMan.selectElem(event)
+			}
+			if (event.button == 1){
+				elemMan.flip(event.toElement)
+			}
 		};
 
 		this.mouseUpEvent = function(event){
@@ -51,14 +61,14 @@ class gameEvents{
 	}
 
 	enableFlipMode(){
-		document.addEventListener('dblclick',this.event_doubleClick_flip);
+		document.addEventListener('click',this.event_middleClick_flip);
 		waldoGame.mouseMode = "flip";
 		return true;
 	}
 
 	disableFlipMode(){
-		document.removeEventListener('dblclick',this.event_doubleClick_flip);
+/*		document.removeEventListener('dblclick',this.event_middleClick_flip);
 		waldoGame.mouseMode = "default";
-		return true;
+		return true;*/
 	}
 }
