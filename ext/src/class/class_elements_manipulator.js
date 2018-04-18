@@ -49,12 +49,13 @@ class elementsManipulator{
 	selectElem(event){
 		if (this.isValidSelection(event.toElement) ) {
 
-			this.clickedElem = event.target;
-			this.prepreChildrens(this.clickedElem);
+			this.clickedElem = event.toElement;
+			//this.prepreChildrens(this.clickedElem);
 			//this.clickedElem = event.target;
+			this.clickedElem.cssText =  getComputedStyle(event.toElement).cssText
 			this.clickedElem.draggable = false;
-			this.oldStyle = this.clickedElem.getBoundingClientRect()
 			this.computed = getComputedStyle(this.clickedElem).cssText
+			this.oldStyle = this.clickedElem.getBoundingClientRect()
 			this.tempElem = document.createElement("div");
 			this.tempElem.style.cssText = this.computed
 			this.oldStyle.cssText = this.tempElem.style
@@ -69,7 +70,6 @@ class elementsManipulator{
 			this.oldStyle.backgroundColor = this.tempElem.style.backgroundColor
 			this.oldStyle.backgroundImage = this.tempElem.style.backgroundImage
 			this.cloneStyle(this.oldStyle, this.clickedElem)
-			this.clickedElem.cssText =  getComputedStyle(this.clickedElem).cssText
 			this.prepareElem(this.clickedElem);
 			}
 			else{
@@ -97,7 +97,7 @@ class elementsManipulator{
 
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
 	deSelectElem(){
-		this.clickedElem.style.cssText = window.getComputedStyle(this.clickedElem).cssText
+		//this.clickedElem.style.cssText = window.getComputedStyle(this.clickedElem).cssText
 		document.getElementsByTagName("body")[0].appendChild(this.clickedElem)
 		this.clickedElem.style.position = "absolute"
 		//this.clickedElem= this.tempElem
@@ -105,6 +105,8 @@ class elementsManipulator{
 		this.clickedElem.style.left = this.clickedElem.offsetLeft + window.scrollX +"px"
 		this.clickedElem.clientY = this.clickedElem.offsetTop +  window.scrollY
 		this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX		
+		this.cloneStyle(this.oldStyle, this.clickedElem)
+		console.log(this.clickedElem.style.cssText)
 		this.clickedElem=null;
 	}
 
