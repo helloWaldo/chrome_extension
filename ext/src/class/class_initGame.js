@@ -3,7 +3,6 @@ class initGame{
 		this.timeInterval;
 		this.GameOnLable()
 		this.initClock()
-
 	}
 
 	// the game on lable TODO: add where is waldo parameters for debug
@@ -45,5 +44,4 @@ class initGame{
 		}
 		this.clock.innerHTML = `${Math.floor(waldoGame.timeInSec/60)} Min ${Math.floor(waldoGame.timeInSec%60)}Sec`;
 	}
-
 }

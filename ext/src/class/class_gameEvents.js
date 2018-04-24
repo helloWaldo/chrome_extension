@@ -10,7 +10,6 @@ class gameEvents{
      			window.location = '';
 				elemMan.flip(event.toElement)
 			}
-
 		};
 
 		this.mouseDownEvent = function(event){
@@ -38,7 +37,6 @@ class gameEvents{
 			
 			}
 		}
-
 	}
 	
 

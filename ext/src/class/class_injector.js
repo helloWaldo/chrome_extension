@@ -3,7 +3,6 @@ class injector{
 		this.imgSrc =  "https://chairmanmigo.com/wp-content/uploads/2014/06/Wheres-Waldo-Face.jpg"
 		this.injectObj = document.createElement("img")
 		this.setInjectObj()
-		//this.injectObj.style.zIndex= -5
 	}
 
 	setInjectObj(){
@@ -15,7 +14,7 @@ class injector{
 		this.injectObj.src = this.imgSrc
 	}
 
-		//injecting img to the first layer of the body TODO get image path function as paramater
+	//injecting img to the first layer of the body TODO get image path function as paramater
 	injectImg(){
 		let hideElem = elemMan.chooseRandElem(this.injectObj) 
 		this.injectObj.style.top =  hideElem.offsetTop + "px"
@@ -28,5 +27,4 @@ class injector{
 		console.log( hideElem.clientTop)
 		console.log( window.screenTop)
 	}
-
 }

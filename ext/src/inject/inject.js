@@ -5,8 +5,3 @@ injecto = new injector();
 
 // Start Game
 waldoGame.start();
-
-
-
-
-

@@ -1,16 +1,13 @@
 class game{
 
 	constructor(){
-
 		this.timeInSec = 180;
 		this.mouseMode = 'default';
 		this.gameEvents = new gameEvents();
-
 	}
 
 	// Start Game
 	start(){
-
 		this.gameEvents.enableDragMode();
 		this.gameEvents.enableFlipMode();
 		elemMan.disableAllLinks();
@@ -30,5 +27,4 @@ class game{
 		
 		return false;
 	}
-
 }

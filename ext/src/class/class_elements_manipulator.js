@@ -9,7 +9,6 @@ class elementsManipulator{
 		this.callIndex=0;
 		this.randElem;
 		this.maxRecusion = 1000;
-
 	}
 
 	flip(elem){
@@ -23,7 +22,6 @@ class elementsManipulator{
 			elem.style.transform = "rotateY(0deg)";			
 		}
 		//this.deSelectElem(elem);
-
 	}
 
 	fixed(){
@@ -32,7 +30,6 @@ class elementsManipulator{
 
 	addTransition(elem, style, duration){
 		elem.style.transition = style + " " + duration + " ease";
-		//elem.style.transition = "transform 1s ease";
 	}
 
 	paddingless(){
@@ -42,13 +39,11 @@ class elementsManipulator{
 	prepareElem(){
 		this.fixed(this.clickedElem);
 		this.paddingless(this.clickedElem);
-		this.clickedElem.style.zIndex= this.zIndex++;
-		
+		this.clickedElem.style.zIndex= this.zIndex++;		
 	}
 
 	selectElem(event){
 		if (this.isValidSelection(event.toElement) ) {
-
 			this.clickedElem = event.toElement;
 			//this.prepreChildrens(this.clickedElem);
 			//this.clickedElem = event.target;
@@ -71,12 +66,9 @@ class elementsManipulator{
 			this.oldStyle.backgroundImage = this.tempElem.style.backgroundImage
 			this.cloneStyle(this.oldStyle, this.clickedElem)
 			this.prepareElem(this.clickedElem);
-			}
-			else{
-				this.selectElem(event.toElement.classList)
-			}
-	//debugger
-	
+		} else {
+			this.selectElem(event.toElement.classList)
+		}
 	}
 
 	prepreChildrens(elem){
@@ -86,14 +78,11 @@ class elementsManipulator{
 	}
 
 	isValidSelection(element){
-
 		if (element.nodeType  == 1 || (element.tagName =="DIV" || element.tagName =="IMG") ){
-
 			return true
 		}
 		return false
 	}
-
 
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
 	deSelectElem(){
@@ -106,7 +95,6 @@ class elementsManipulator{
 		this.clickedElem.clientY = this.clickedElem.offsetTop +  window.scrollY
 		this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX		
 		this.cloneStyle(this.oldStyle, this.clickedElem)
-		console.log(this.clickedElem.style.cssText)
 		this.clickedElem=null;
 	}
 
@@ -146,7 +134,6 @@ class elementsManipulator{
 	}
 
 	isHidable(){
-	//let bounding = element.getBoundingClientRect();
 		if(this.randElem.clientLeft >= 0 && 
 		   this.randElem.clientTop >= 0 && 
 		   this.randElem.clientWidth > parseInt(injecto.injectObj.style.width) &&
@@ -156,12 +143,12 @@ class elementsManipulator{
 		return false;
 	}
 
-		//Preventing defult on click for elements Arr
+	//Preventing defult on click for elements Arr
 	disableLinks(elements){
 		for (var i = 0; i < elements.length; i++) {
-				elements[i].setAttribute("onClick","event.preventDefault();");
-				elements[i].setAttribute("onmousedown","event.preventDefault();");
-				elements[i].href = "/#";
+			elements[i].setAttribute("onClick","event.preventDefault();");
+			elements[i].setAttribute("onmousedown","event.preventDefault();");
+			elements[i].href = "/#";
 		}
 	}
 
@@ -175,8 +162,8 @@ class elementsManipulator{
 		this.disableLinks(aElements);
 		this.disableLinks(imgElements);
 		this.disableLinks(spanElements);
-
-	}	
+	}
+	
 	//not sure we will use this to prevent elements to have event listenrs
 /*    cloneReplace(element){
     	let old_element = element;
@@ -208,7 +195,7 @@ class elementsManipulator{
 	  );
 	}*/
 
-/*	
+	/*	
 	findHighestZIndex(elem){
 	  var elems = document.getElementsByTagName(elem);
 	  var highest = 0;
