@@ -24,7 +24,5 @@ class injector{
 		this.injectObj.addEventListener('mouseup',() => {
 			waldoGame.end()
 		})
-		console.log( hideElem.clientTop)
-		console.log( window.screenTop)
 	}
 }

@@ -23,8 +23,10 @@ class gameEvents{
 		};
 
 		this.mouseUpEvent = function(event){
-			document.body.style.cursor = "-webkit-grab"
-			elemMan.deSelectElem();
+			if (event.button == 0){
+				document.body.style.cursor = "-webkit-grab"
+				elemMan.deSelectElem();
+			}
 		};
 
 		// Function for event listner

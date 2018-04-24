@@ -42,12 +42,18 @@ class elementsManipulator{
 		this.clickedElem.style.zIndex= this.zIndex++;		
 	}
 
-	selectElem(event){
-		if (this.isValidSelection(event.toElement) ) {
+	selectElem(event,element){
+		this.callIndex++
+		if(typeof element === "undefined"){
 			this.clickedElem = event.toElement;
+		} else {
+			this.clickedElem = element;
+		}
+		if (this.isValidSelection(this.clickedElem) ) {
 			//this.prepreChildrens(this.clickedElem);
 			//this.clickedElem = event.target;
-			this.clickedElem.cssText =  getComputedStyle(event.toElement).cssText
+			this.callIndex = 0
+			this.clickedElem.cssText =  getComputedStyle(this.clickedElem).cssText
 			this.clickedElem.draggable = false;
 			this.computed = getComputedStyle(this.clickedElem).cssText
 			this.oldStyle = this.clickedElem.getBoundingClientRect()
@@ -67,18 +73,20 @@ class elementsManipulator{
 			this.cloneStyle(this.oldStyle, this.clickedElem)
 			this.prepareElem(this.clickedElem);
 		} else {
-			this.selectElem(event.toElement.classList)
+			this.selectElem(null, this.clickedElem.parentElement)
 		}
+
 	}
 
 	prepreChildrens(elem){
 		if(true){
-			console.log(elem.children)
+			//console.log(elem.children)
 		}
 	}
 
 	isValidSelection(element){
-		if (element.nodeType  == 1 || (element.tagName =="DIV" || element.tagName =="IMG") ){
+		if (element.nodeType  == 1 && (element.tagName =="DIV" || element.tagName =="IMG") && this.maxRecusion > this.callIndex){
+
 			return true
 		}
 		return false
@@ -96,6 +104,7 @@ class elementsManipulator{
 		this.clickedElem.clientX = this.clickedElem.offsetLeft + window.scrollX		
 		this.cloneStyle(this.oldStyle, this.clickedElem)
 		this.clickedElem=null;
+
 	}
 
 	cloneStyle(fromStyle, toElem){
@@ -123,8 +132,8 @@ class elementsManipulator{
 		this.callIndex++;
 		let rndChildInx = Math.floor((Math.random() * this.baseBodyPath.length));	
 		this.randElem = this.baseBodyPath[rndChildInx];
-		console.log(this.randElem);
 		if ((this.randElem.nodeName =="DIV" || this.randElem.nodeName =="IMG"|| this.randElem.nodeName =="P") && this.isHidable()) {
+			this.callIndex = 0
 			return this.randElem;
 		}else if(this.callIndex < this.maxRecusion){
 			return this.chooseRandElem();
