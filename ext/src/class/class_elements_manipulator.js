@@ -12,14 +12,14 @@ class elementsManipulator{
 	}
 
 	flip(elem){
-		if(elem.style.transform != "perspective(170px) rotateY(180deg)" ){
-			elem.style.transform = "perspective(170px) rotateY(0deg)";
+		if(elem.style.transform != "perspective("+elem.offsetWidth+"px) rotateY(180deg)" ){
+			elem.style.transform = "perspective("+elem.offsetWidth+"px) rotateY(0deg)";
 			this.addTransition (elem,"transform","1s");
-			elem.style.transform = "perspective(170px) rotateY(180deg)";
+			elem.style.transform = "perspective("+elem.offsetWidth+"px) rotateY(180deg)";
 		}else{
-			elem.style.transform = "perspective(170px) rotateY(180deg)";
+			elem.style.transform = "perspective("+elem.offsetWidth+"px) rotateY(180deg)";
 			this.addTransition (elem,"transform","1s");
-			elem.style.transform = "perspective(170px) rotateY(0deg)";			
+			elem.style.transform = "perspective("+elem.offsetWidth+"px) rotateY(0deg)";			
 		}
 		//this.deSelectElem(elem);
 	}
