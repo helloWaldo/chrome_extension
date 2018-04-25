@@ -2,17 +2,19 @@
  * 
  **/
 body{
-  -webkit-user-select: none;  
-  -moz-user-select: none;    
-  -ms-user-select: none;      
-  user-select: none;
+		
+		
 }
 
 
  [wasDragged = deffinitly]{
-		-webkit-box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
-		-moz-box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
-		box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
+	-webkit-box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
+	-moz-box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
+	box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;
 }
 
 
