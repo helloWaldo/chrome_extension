@@ -34,7 +34,7 @@
   "content_scripts": [
     {
       "matches": [
-        "http://*/*"
+        "<all_urls>"
       ],
       "css": [
         "src/inject/inject.css"

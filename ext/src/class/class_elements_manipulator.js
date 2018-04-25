@@ -50,6 +50,7 @@ class elementsManipulator{
 			this.clickedElem = element;
 		}
 		if (this.isValidSelection(this.clickedElem) ) {
+			this.clickedElem.setAttribute("wasDragged", "deffinitly")
 			//this.prepreChildrens(this.clickedElem);
 			//this.clickedElem = event.target;
 			this.callIndex = 0
@@ -94,6 +95,7 @@ class elementsManipulator{
 
 	//TODO: when finish drag the element is in fixed postion - need to decide if this is o.k or want to reinsert it to DOM in absolute position
 	deSelectElem(){
+		this.clickedElem.removeAttribute("wasDragged")
 		//this.clickedElem.style.cssText = window.getComputedStyle(this.clickedElem).cssText
 		document.getElementsByTagName("body")[0].appendChild(this.clickedElem)
 		this.clickedElem.style.position = "absolute"
