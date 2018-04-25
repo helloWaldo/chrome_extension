@@ -8,8 +8,15 @@ body{
 }
 
 
- [wasDragged]{
+ [wasDragged = deffinitly]{
 		-webkit-box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
 		-moz-box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
 		box-shadow: 23px 24px 6px -5px rgba(69,67,67,0.58);
+}
+
+
+ [wasDragged = was]{
+		-webkit-box-shadow: 10px 10px 5px -9px rgba(0,0,0,0.75);
+		-moz-box-shadow: 10px 10px 5px -9px rgba(0,0,0,0.75);
+		box-shadow: 10px 10px 5px -9px rgba(0,0,0,0.75);
 }
