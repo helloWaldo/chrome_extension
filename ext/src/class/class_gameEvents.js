@@ -39,6 +39,13 @@ class gameEvents{
 			
 			}
 		}
+
+		this.pauseKeyPressed = function(event){
+			if(event.keyCode == 32){
+				event.preventDefault();
+				waldoGame.pause()
+		    }
+		}
 	}
 	
 
@@ -68,5 +75,10 @@ class gameEvents{
 /*		document.removeEventListener('dblclick',this.event_middleClick_flip);
 		waldoGame.mouseMode = "default";
 		return true;*/
+	}
+
+	enablePause(){
+		document.addEventListener('keypress', this.pauseKeyPressed);
+		return true;
 	}
 }

@@ -1,47 +1,51 @@
 class initGame{
 	constructor(){
-		this.timeInterval;
-		this.GameOnLable()
+		this.initPanel()
+		this.timeInterval
+		this.gameStatus()
 		this.initClock()
+		this.clockLabel()	
+	}
+
+	initPanel(){
+		this.gamePanel = document.createElement("div"); 
+		this.gamePanel.classList.add('game-panel');
+		document.body.insertBefore(this.gamePanel, document.body.firstChild);
 	}
 
 	// the game on lable TODO: add where is waldo parameters for debug
-	GameOnLable(){
-		let body = document.getElementsByTagName('body');
-		let gameOnLable = document.createElement("div"); 
-		let lableContent = document.createTextNode("Game on!"); 
+	gameStatus(){
+		this.gameStatus = document.createElement("div"); 
+		this.gameStatusLabel = document.createTextNode("Game on!"); 
 		this.clockLabel()
-		gameOnLable.style.fontSize= "85px";
-		gameOnLable.style.fontWeight="400";
-		gameOnLable.style.lineHeight = "2em";
-		gameOnLable.style.backgroundColor = "#24b9e7";
-		gameOnLable.style.textAlign= "center";
-		gameOnLable.style.direction= "ltr";
-		gameOnLable.appendChild(lableContent);
-		document.body.insertBefore(this.clock, document.body.firstChild);
-		document.body.insertBefore(gameOnLable, document.body.firstChild);
+		this.gameStatus.classList.add('game-status');
+		this.gameStatus.appendChild(this.gameStatusLabel);
+		this.gamePanel.appendChild(this.gameStatus);
 	}
 
 	initClock(){
 		this.timeInterval = setInterval (() => {
-			this.clockLabel()
-			if (waldoGame.timeInSec > 0) {
+			if (waldoGame.timeInSec > 0 && waldoGame.isPause == 0) {
 				waldoGame.timeInSec--;
-			}else{
+			}else if(waldoGame.timeInSec > 0){
+				//game pause 
+			}
+			else{
 				waldoGame.end();
 			}
+
+			this.clockLabel()
 		}, 1000);
 	}
 
 	clockLabel(){
 		if(!this.clock) {
 			this.clock = document.createElement("div");
-			this.clock.style.fontSize= "45px";
-			this.clock.style.backgroundColor = "#24b9e7";
-			this.clock.style.textAlign= "center";
-			this.clock.style.direction= "ltr";
-			document.body.appendChild(this.clock)
+			this.clock.classList.add('game-clock');
+			this.gamePanel.appendChild(this.clock);
 		}
-		this.clock.innerHTML = `${Math.floor(waldoGame.timeInSec/60)} Min ${Math.floor(waldoGame.timeInSec%60)}Sec`;
+		this.clockDiv = `${Math.floor(waldoGame.timeInSec/60)} Min ${Math.floor(waldoGame.timeInSec%60)}Sec`
+		document.getElementsByClassName("game-clock")[0].innerHTML = this.clockDiv
+			
 	}
 }

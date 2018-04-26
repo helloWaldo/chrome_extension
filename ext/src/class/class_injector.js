@@ -7,8 +7,8 @@ class injector{
 
 	setInjectObj(){
 		this.injectObj.id="waldoImg"
-		this.injectObj.style.width= "150px"
-		this.injectObj.style.height= "150px"
+		this.injectObj.style.width= "60px"
+		this.injectObj.style.height= "60px"
 		this.injectObj.style.position= "absolute"		
 		this.injectObj.style.visibility='visible'	
 		this.injectObj.src = this.imgSrc
@@ -19,7 +19,7 @@ class injector{
 		let hideElem = elemMan.chooseRandElem(this.injectObj) 
 		this.injectObj.style.top =  hideElem.offsetTop + "px"
 		this.injectObj.style.left =  hideElem.offsetLeft + "px"
-		this.injectObj.style.zIndex= hideElem.style.zIndex + 1000
+		this.injectObj.style.zIndex= hideElem.style.zIndex 
 		hideElem.prepend(this.injectObj)
 		this.injectObj.addEventListener('mouseup',() => {
 			waldoGame.end()

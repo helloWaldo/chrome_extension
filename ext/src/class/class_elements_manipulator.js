@@ -39,7 +39,7 @@ class elementsManipulator{
 	prepareElem(){
 		this.fixed(this.clickedElem);
 		this.paddingless(this.clickedElem);
-		this.clickedElem.style.zIndex= this.zIndex++;		
+				
 	}
 
 	selectElem(event,element){
@@ -50,6 +50,7 @@ class elementsManipulator{
 			this.clickedElem = element;
 		}
 		if (this.isValidSelection(this.clickedElem) ) {
+			this.clickedElem.style.zIndex= this.zIndex++;
 			this.clickedElem.setAttribute("wasDragged", "deffinitly")
 			//this.prepreChildrens(this.clickedElem);
 			//this.clickedElem = event.target;
@@ -173,6 +174,15 @@ class elementsManipulator{
 		this.disableLinks(aElements);
 		this.disableLinks(imgElements);
 		this.disableLinks(spanElements);
+	}
+
+	showOldBody(){
+		this.lastBody = document.body.innerHTML
+		document.body.innerHTML = waldoGame.originalBody
+	}
+
+	returnGameBody(){
+		document.body.innerHTML = this.lastBody
 	}
 	
 	//not sure we will use this to prevent elements to have event listenrs
